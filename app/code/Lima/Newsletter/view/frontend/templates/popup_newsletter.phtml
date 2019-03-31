@@ -1,0 +1,74 @@
+<?php
+/** @var \Lima\Newsletter\Block\Subscribe $block */
+?>
+<div id="lima_newsletter_popup" class="newsletter-popup">
+	<div class="popup" style="height: 295px;"> 
+		<a class="close" href="#">&times;</a>
+		<div id="dialog" class="window">
+			<div class="box">
+				<div class="newletter-title">
+					<h2><?php /* @escapeNotVerified */ echo __('Newsletter') ?></h2>
+				</div>
+				<div class="box-content newleter-content">
+					<label><?php echo (string) $block->getText() ?></label>
+					<div id="form_subscribe">
+						<form class="form subscribe"
+							novalidate
+							action="<?php echo (string) $block->escapeUrl($block->getFormActionUrl()) ?>"
+							method="post"
+							data-mage-init='{
+								"validation": {
+									"errorClass": "mage-error",
+									"rules": {
+										"email": {
+											"required":true
+										},
+										"firstname": {
+											"required":true
+										},
+										"mobile_number": {
+											"required":true
+										}
+									}
+								}
+							}'
+							id="newsletter-validate">
+							<div>
+								<input data-validate='{"required":true}' required="true" class="required" type="text" value="" name="email" id="email" placeholder="Email">
+								<input data-validate='{"required":true}' required="true" class="required" type="text" value="" name="firstname" id="firstname" placeholder="Name">
+								<input data-validate='{"required":true}' required="true" class="required" type="text" value="" name="mobile_number" id="mobile_number" placeholder="Mobile Number">
+
+								<div id="notification"></div>
+
+								<input type="hidden" id="lima_newsletter_stop_popup" name="lima_newsletter_stop_popup" value="0">
+								<button class="action subscribe" title="<?php echo $block->escapeHtmlAttr(__('Subscribe')) ?>" type="submit">
+									<span><?php echo $block->escapeHtml(__('Subscribe')) ?></span>
+								</button>
+							</div>
+						</form>
+						<div class="subscribe-bottom">
+							<input type="checkbox" id="newsletter_popup_dont_show_again" name="newsletter_popup_dont_show_again">
+							<label for="newsletter_popup_dont_show_again">Don't show this popup again</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/x-magento-init">
+	{
+		"*": {
+		"limaNewsletterPopup": {
+				"enabled":"<?php echo (int) $block->isEnabled() ?>",
+				"elementId":"#lima_newsletter_popup",
+				"elementClose":".close",
+				"elementDoNotShowAgain":"#newsletter_popup_dont_show_again",
+				"elementDoNotShowAgainHidden":"#lima_newsletter_stop_popup",
+				"cookieName":"lima_newsletter_popup",
+				"timeToShow":"<?php echo (int) $block->getTimeToShow(); ?>"
+			}
+		}
+	}
+</script>

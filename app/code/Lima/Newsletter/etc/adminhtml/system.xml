@@ -1,0 +1,44 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+
+		<tab id="lima_newsletter" translate="label" sortOrder="100">
+			<label>Newsletter Popup</label>
+		</tab>
+
+		<section id="lima_newsletter" translate="label" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+
+			<class>separator-top</class>
+			<label>Configuration</label>
+			<tab>lima_newsletter</tab>
+			<resource>Lima_Newsletter::config</resource>
+
+			<group id="general" translate="label" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+
+				<label>Lima Newsletter - Configuration</label>
+
+				<field id="status" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Is Enabled</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+
+				<field id="time_to_show" translate="label" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Seconds to Show</label>
+					<depends>
+						<field id="lima_newsletter/general/status">1</field>
+					</depends>
+					<!-- <comment>Default value: 3</comment> -->
+				</field>
+
+				<field id="text" translate="label" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Text</label>
+					<depends>
+						<field id="lima_newsletter/general/status">1</field>
+					</depends>
+					<!-- <comment>Default value: Subscribe to our newsletters now and stay up-to-date with new products and exclusive offers</comment> -->
+				</field>
+
+			</group>
+
+		</section>
+	</system>
+</config>
